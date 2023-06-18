@@ -2,38 +2,37 @@ import { useState } from 'react';
 
 import { RiMenu3Fill } from 'react-icons/ri';
 
-import { Session } from 'next-auth';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 
-import axios from 'axios';
-
 import Image from 'next/image';
+import { poppins } from '@/styles/poppins';
+
+import { quotes } from '@/lib/quotes.json';
 
 interface ServerSideProps {
-  citation: {
-    author: string;
-    text: string;
-  };
   user: {
     name: string;
     email: string;
     image: string;
   };
+  quote: {
+    citation: string;
+    author: string;
+  };
 }
 
-export default function Dashboard({ user, citation }: ServerSideProps) {
+export default function Dashboard({ user, quote }: ServerSideProps) {
   const [modalIsShowingToUser, setModalIsShowingToUser] = useState(false);
+
   function handleToggleVisibilityOfModal() {
     setModalIsShowingToUser(!modalIsShowingToUser);
   }
 
-  console.log(user);
-
   return (
     <>
       <div
-        className="fixed flex flex-col items-center justify-center z-10 bg-background inset-0"
+        className={`${poppins.className} fixed flex flex-col items-center justify-center z-10 bg-background inset-0`}
         style={{ display: modalIsShowingToUser ? 'flex' : 'none' }}
       >
         <h2 className="uppercase text-base text-zinc-400 leading-tight">
@@ -49,6 +48,9 @@ export default function Dashboard({ user, citation }: ServerSideProps) {
           </li>
           <li className="text-2xl font-medium hover:text-red-500 transition-colors">
             Ranking
+          </li>
+          <li className="text-2xl font-medium hover:text-red-500 transition-colors">
+            Sair
           </li>
         </ul>
 
@@ -71,8 +73,25 @@ export default function Dashboard({ user, citation }: ServerSideProps) {
             height={130}
           />
 
+          <nav className="hidden md:block">
+            <ul className="flex gap-5">
+              <li className="text-base text-white font-normal cursor-pointer transition-colors">
+                Painel
+              </li>
+              <li className="text-base text-white font-normal cursor-pointer transition-colors">
+                Biblioteca
+              </li>
+              <li className="text-base text-white font-normal cursor-pointer transition-colors">
+                Ranking
+              </li>
+              <li className="text-base text-white font-normal cursor-pointer transition-colors">
+                Sair
+              </li>
+            </ul>
+          </nav>
+
           <button
-            className="bg-red-400 p-2 rounded-lg hover:brightness-[0.8] transition-all"
+            className="bg-red-400 p-2 rounded-lg hover:brightness-[0.8] transition-all md:hidden"
             onClick={handleToggleVisibilityOfModal}
           >
             <RiMenu3Fill size={24} color="white" />
@@ -102,10 +121,10 @@ export default function Dashboard({ user, citation }: ServerSideProps) {
 
             <footer className="mt-5 flex flex-col gap-2 border-l-red-500 border-t-transparent border-b-transparent border-r-transparent border-solid border-l-8 pl-4">
               <p className="text-base italic text-zinc-800">
-                “{citation?.text}”
+                “{quote?.citation}”
               </p>
               <p className="text-base italic text-zinc-500">
-                — {citation?.author}
+                — {quote?.author}
               </p>
             </footer>
           </header>
@@ -120,6 +139,9 @@ export default function Dashboard({ user, citation }: ServerSideProps) {
 export const getServerSideProps: GetServerSideProps = async ctx => {
   const session = await getSession(ctx);
 
+  const randomQuouteArrayIndex = Math.floor(Math.random() * quotes.length);
+  const randomQuote = quotes[randomQuouteArrayIndex];
+
   if (!session) {
     return {
       redirect: {
@@ -129,31 +151,14 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     };
   }
 
-  const request = await axios.get<{
-    frases: { autor: string; texto: string }[];
-  }>('https://pensador-api.vercel.app/', {
-    params: {
-      term: '',
-    },
-  });
-
-  const response = request.data;
-  const phrases = response.frases.filter(frase => frase.texto.length <= 200);
-
-  const randomPhrasesIndex = Math.floor(Math.random() * phrases.length);
-  const selectedPhrase = phrases[randomPhrasesIndex];
-
   return {
     props: {
-      citation: {
-        author: selectedPhrase.autor,
-        text: selectedPhrase.texto,
-      },
       user: {
         name: session.user?.name,
         image: session.user?.image,
         email: session.user?.email,
       },
+      quote: randomQuote,
     },
   };
 };

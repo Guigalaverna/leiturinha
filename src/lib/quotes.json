@@ -1,0 +1,44 @@
+{
+  "quotes": [
+    {
+      "author": "John Lennon",
+      "citation": "A vida é o que acontece enquanto você está ocupado fazendo outros planos."
+    },
+    {
+      "author": "John Wooden",
+      "citation": "Se a vida não ficar mais fácil, trate de ficar mais forte."
+    },
+    {
+      "author": "Albert Einstein",
+      "citation": "A imaginação é mais importante que o conhecimento. O conhecimento é limitado, enquanto a imaginação abraça o mundo inteiro."
+    },
+    {
+      "author": "Steve Jobs",
+      "citation": "A única maneira de fazer um ótimo trabalho é amar o que você faz."
+    },
+    {
+      "author": "Salvador Dalí",
+      "citation": "Não tenha medo da perfeição, você nunca a alcançará."
+    },
+    {
+      "author": "Winston Churchill",
+      "citation": "O sucesso é ir de fracasso em fracasso sem perder entusiasmo."
+    },
+    {
+      "author": "Frank Sinatra",
+      "citation": "A melhor vingança é um sucesso estrondoso."
+    },
+    {
+      "author": "Tina Fey",
+      "citation": "Não existem erros, apenas oportunidades de aprendizado."
+    },
+    {
+      "author": "Bill Gates",
+      "citation": "O verdadeiro teste não está em evitar as falhas, mas em como nos recuperamos delas."
+    },
+    {
+      "author": "Nelson Mandela",
+      "citation": "A educação é a arma mais poderosa que você pode usar para mudar o mundo."
+    }
+  ]
+}

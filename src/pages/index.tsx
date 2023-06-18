@@ -5,10 +5,13 @@ import { authOptions } from './api/auth/[...nextauth]';
 import { getSession, signIn } from 'next-auth/react';
 
 import Image from 'next/image';
+import { poppins } from '@/styles/poppins';
 
 export default function Home() {
   return (
-    <main className="w-screen h-screen flex flex-col bg-background p-10 lg:px-24 py-[3rem]">
+    <main
+      className={`${poppins.className} w-screen h-screen flex flex-col bg-background p-10 lg:px-24 py-[3rem]`}
+    >
       <header className="w-full flex items-center justify-between">
         <Image
           src="/logo-black.svg"
