@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <main className="w-screen h-screen flex flex-col bg-background-500 p-10 lg:px-24 py-[3rem]">
+    <main className="w-screen h-screen flex flex-col bg-background p-10 lg:px-24 py-[3rem]">
       <header className="w-full flex items-center justify-between">
         <Image
           src="/logo-black.svg"
