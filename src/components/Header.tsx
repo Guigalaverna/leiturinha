@@ -1,4 +1,6 @@
 import { poppins } from '@/styles/poppins';
+import { sign } from 'crypto';
+import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -35,15 +37,14 @@ export function Header() {
             >
               Biblioteca
             </Link>
-            {/* <Link href='' className="text-base text-white font-normal cursor-pointer transition-colors">
-                Ranking
-              </Link> */}
-            <Link
+
+            <a
               href=""
+              onClick={() => signOut()}
               className="text-base text-white font-normal cursor-pointer transition-colors"
             >
               Sair
-            </Link>
+            </a>
           </ul>
         </nav>
 
@@ -76,15 +77,14 @@ export function Header() {
           >
             Biblioteca
           </Link>
-          {/* <Link href='/ranking' className="text-2xl font-medium hover:text-red-500 transition-colors">
-            Ranking
-          </Link> */}
-          <Link
-            href=""
+
+          <a
+            href="#"
+            onClick={() => signOut()}
             className="text-2xl font-medium hover:text-red-500 transition-colors"
           >
             Sair
-          </Link>
+          </a>
         </ul>
 
         <footer className="mt-10">

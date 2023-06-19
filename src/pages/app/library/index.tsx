@@ -1,5 +1,7 @@
 import { Header } from '@/components/Header';
 import { poppins } from '@/styles/poppins';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
 import { RiSearch2Line } from 'react-icons/ri';
 
 export default function Library() {
@@ -32,3 +34,20 @@ export default function Library() {
     </main>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  const session = getSession(ctx);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: true,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
