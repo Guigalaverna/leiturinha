@@ -1,6 +1,4 @@
 import { GetServerSideProps } from 'next';
-import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]';
 
 import { getSession, signIn } from 'next-auth/react';
 
