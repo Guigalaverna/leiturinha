@@ -4,6 +4,7 @@ import { poppins } from '@/styles/poppins';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 interface ServerSideProps {
@@ -74,7 +75,11 @@ export default function Library({ books: booksFromNotion }: ServerSideProps) {
             const isAvailable = book.properties['Está disponível?'].checkbox;
 
             return (
-              <div key={book.id} className="flex flex-col items-start gap-3">
+              <Link
+                key={book.id}
+                className="flex flex-col items-start gap-3"
+                href={`/app/library/${book.id}`}
+              >
                 <Image
                   src={coverUrl}
                   alt={`Capa do livro ${title}`}
@@ -105,7 +110,7 @@ export default function Library({ books: booksFromNotion }: ServerSideProps) {
                     checked={isAvailable}
                   />
                 </div>
-              </div>
+              </Link>
             );
           })}
         </section>
